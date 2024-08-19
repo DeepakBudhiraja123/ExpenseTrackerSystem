@@ -1,9 +1,9 @@
-import {IncomeSchema} from "../models/incomeModel.js"
+import {ExpenseSchema} from "../models/expenseModel.js"
 
-export const addIncome = async (req, res) => {
+export const addExpense = async (req, res) => {
     const {title, amount, category, description, date} = req.body;
 
-    const income = IncomeSchema({
+    const expense = ExpenseSchema({
         title, amount, category, description, date
     });
 
@@ -18,7 +18,7 @@ export const addIncome = async (req, res) => {
                 message: "Amount must be a positive number"
             })
         }
-        await income.save();
+        await expense.save();
 
         res.status(200).json({
             message: "Data updated successfully"
@@ -31,23 +31,21 @@ export const addIncome = async (req, res) => {
     }
 }
 
-export const getIncome = async (req, res) =>{
+export const getExpense = async (req, res) =>{
     try {
-        const incomes = await IncomeSchema.find().sort({createdAt: -1});
-        res.status(200).json(incomes);
+        const expense = await ExpenseSchema.find().sort({createdAt: -1});
+        res.status(200).json(expense);
     } catch (error) {
         res.status(400).json({
             message: "server error"
         })
     }
 }
-export const deleteIncome = async (req, res) =>{
+export const deleteExpense = async (req, res) =>{
     const {id} = req.params;
-    console.log(params);
-    
-    IncomeSchema.findByIdAndDelete(id).then(()=>{
+    ExpenseSchema.findByIdAndDelete(id).then(()=>{
         res.status(200).json({
-            message: "Income Deleted"
+            message: "Expense Deleted"
         })
     }).catch((err)=>{
         res.status(500).json({

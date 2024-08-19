@@ -3,6 +3,7 @@ import cors from "cors";
 import { db } from "./db/db.js";
 import "dotenv/config" 
 import incomeRouter from "./routes/incomeRoute.js"
+import expenseRouter from "./routes/expenseRouter.js"
 
 const PORT = process.env.PORT;
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 // routes
 app.use("/api/v1/income", incomeRouter);
+app.use("/api/v1/expense", expenseRouter);
 
 const server = () => {
     db();
