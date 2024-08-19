@@ -1,7 +1,7 @@
-const { addIncome } = require('../controllers/income');
+import express from "express";
+const router = express.Router();
+import { addIncome, getIncome, deleteIncome } from "../controllers/income.js";
 
-const router = require('express').Router();
+router.post("/add-income", addIncome).get("/get-income", getIncome).delete("/delete-income/:id", deleteIncome);
 
-router.post('/add-income', addIncome);
-
-module.exports = router;
+export default router;

@@ -1,9 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const { db } = require('./db/db');
-const {readdirSync} = require('fs') 
-
-require('dotenv').config();
+import express from "express";
+import cors from "cors";
+import { db } from "./db/db.js";
+import "dotenv/config" 
+import incomeRouter from "./routes/incomeRoute.js"
 
 const PORT = process.env.PORT;
 
@@ -14,9 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-readdirSync('./routes').map((route)=>
-    app.use('/api/v1', require('./routes/' + route))
-)
+app.use("/api/v1/income", incomeRouter);
 
 const server = () => {
     db();
